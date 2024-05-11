@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!--<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Tab 1
@@ -14,4 +14,30 @@
   </ion-header>
 
   <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+</ion-content>-->
+
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <div>
+        <ion-button routerLink="/login" fill="clear"><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-button>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <h6>What's new</h6>
+    <h6>History</h6>
+    <h6>Settings and Privacity</h6>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Music</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"></ion-content>
+</div>
