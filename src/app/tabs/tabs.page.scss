@@ -1,7 +1,31 @@
 *{
     --background: #0F0818 !important;
+    /*--color-selected: linear-gradient(#5F41B6, #FC0290) !important;
+    */
 }
 
 ion-tab-bar {
     border-style: none;
 }
+
+/*ion-tab-button {
+    --color-selected: #FC0290 !important;
+}*/
+
+ion-tab-button {
+    .custom-icon {
+      background: linear-gradient(180deg, #5F41B6, #FC0290);
+      -webkit-background-clip: text; 
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+    .custom-label {
+      background: linear-gradient(180deg, #5F41B6, #FC0290);
+      -webkit-background-clip: text;
+      background-clip: text; 
+      color: transparent;
+      font-size: 16x;
+    }
+  }
+  
