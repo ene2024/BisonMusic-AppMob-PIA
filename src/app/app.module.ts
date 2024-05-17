@@ -7,11 +7,17 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  declarations: [AppComponent, LoginComponent, SignUpComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({"projectId":"miapp-2054172","appId":"1:971064005300:web:1d2523013a79faa340fde1","storageBucket":"miapp-2054172.appspot.com","apiKey":"AIzaSyCVVMLLTu-zdIZ6WjunLgeyF16kP5OwEbk","authDomain":"miapp-2054172.firebaseapp.com","messagingSenderId":"971064005300"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

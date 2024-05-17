@@ -1,34 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/router';
-import { TabsPage } from '../tabs/tabs.page';
 import { addDoc, collection } from "firebase/firestore";
 import { getFirestore, doc } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { docData, getDoc, setDoc } from '@angular/fire/firestore';
-import { user } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class LoginComponent  implements OnInit {
+export class SignUpComponent  implements OnInit {
 
   constructor() { }
 
   ngOnInit() {}
-
-  isModalOpen = false;
-  isSignUpOpen = false;
-
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
-
-  Open(isOpen: boolean) {
-    this.isSignUpOpen = isOpen;
-  }    
 
   addUser={
     name:  "",
@@ -36,7 +21,7 @@ export class LoginComponent  implements OnInit {
     user:  "",
     email:  "",
     password:  "",
-  }/*
+  }
 
 
   firestore = getFirestore(initializeApp(environment.firebaseConfig));
@@ -51,7 +36,7 @@ export class LoginComponent  implements OnInit {
       email: this.addUser.email,
       password: this.addUser.password,
     })
-  };*/
+  };
   
 
 }
