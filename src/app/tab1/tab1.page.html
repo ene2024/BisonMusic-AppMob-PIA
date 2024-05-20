@@ -50,6 +50,49 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
+
+    <div *ngIf="!userData">
+      <h1>Welcome to the OAuth2 PKCE Example</h1>
+      <ion-button (click)="login()">Log in with Spotify</ion-button>
+    </div>
+  
+    <div *ngIf="userData">
+    <h1>Logged in as {{ userData.display_name }}</h1>
+    <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
+    <table>
+      <tr>
+        <td>Display name</td>
+        <td>{{ userData.display_name }}</td>
+      </tr>
+      <tr>
+        <td>Id</td>
+        <td>{{ userData.id }}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{ userData.email }}</td>
+      </tr>
+      <tr>
+        <td>Spotify URI</td>
+        <td><a [href]="userData.external_urls.spotify">{{ userData.external_urls.spotify }}</a></td>
+      </tr>
+      <tr>
+        <td>Link</td>
+        <td><a [href]="userData.href">{{ userData.href }}</a></td>
+      </tr>
+      <tr>
+        <td>Profile Image</td>
+        <td><a *ngIf="userData.images && userData.images.length > 0" [href]="userData.images[0].url">{{ userData.images[0].url }}</a></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td>{{ userData.country }}</td>
+      </tr>
+    </table>
+
+    <ion-button (click)="refreshToken()">Refresh Token</ion-button>
+    <ion-button (click)="logout()">Log out</ion-button>
+  </div>
     <ion-item-group>
 
       <ion-item-divider>
@@ -100,7 +143,19 @@
           </ion-button>
         </ion-buttons>
       </ion-item-divider>
-     
+      
+      <!--ion-list>
+        <ion-item *ngFor="let cancion of nuevasCanciones">
+          <ion-thumbnail slot="start">
+            <img [src]="cancion.images[0]?.url" />
+          </ion-thumbnail>
+          <ion-label>
+            <h1>Artista: {{ cancion.artists[0].name }}</h1>
+            <h2>{{ cancion.name }}</h2>
+          </ion-label>
+        </ion-item>
+      </ion-list-->
+
       <ion-card>
         <img width="90px" height="60px" src="https://www.record.com.mx/sites/default/files/styles/v2-crop768x433/public/articulos/2024/05/13/mencho_muerte_1.jpg?itok=eHl0KsM9" alt="mencho">
         <ion-card-header>
