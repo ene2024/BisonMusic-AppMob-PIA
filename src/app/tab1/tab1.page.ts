@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { GlobalService } from '../global.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -22,6 +23,11 @@ export class Tab1Page implements OnInit {
   }*/
 
   userData: any;
+  topArtists: any[] = [];
+  topPlaylists: any[] = [];
+  topTracks: any[] = [];
+  newReleases: any[] = [];
+  loading: boolean = false;
 
   constructor(private _globalService: GlobalService, private spotifyService: SpotifyService) { }
 
@@ -39,6 +45,8 @@ export class Tab1Page implements OnInit {
         this.userData = data;
         console.log('User Data:', this.userData);
       });
+
+      this.loadTopContent();
     }
 
     this._globalService.logAccessToken();
@@ -53,11 +61,57 @@ export class Tab1Page implements OnInit {
     this.spotifyService.getUserData().subscribe(data => {
       this.userData = data;
     });
+    this.loadTopContent();
   }
 
   logout() {
     localStorage.clear();
     this.userData = null;
     window.location.href = '/';
+  }
+
+  loadTopContent() {/*
+    this.spotifyService.getRandomArtists().subscribe((data: any) => {
+      if (data && data.playlists && data.playlists.items.length > 0) {
+        const tracks = data.playlists.items.flatMap((playlist: any) => playlist.tracks.items);
+        this.topArtists = tracks.map((track: any) => track.artists[0]);
+      }
+    }, error => {
+      console.error('Error fetching random artists:', error);
+    });
+
+    this.spotifyService.getTopPlaylists().subscribe((data: any) => {
+      if (data && data.playlists && data.playlists.items) {
+        this.topPlaylists = data.playlists.items;
+      }
+    }, error => {
+      console.error('Error fetching top playlists:', error);
+    });
+
+    this.spotifyService.getRandomTracks().subscribe((data: any) => {
+      if (data && data.albums && data.albums.items.length > 0) {
+        this.topTracks = data.albums.items.flatMap((album: any) => album.tracks.items);
+      }
+    }, error => {
+      console.error('Error fetching random tracks:', error);
+    });*/
+    this.loading = true;
+
+    this.spotifyService.getNewReleases().subscribe(( data: any) => {
+      this.newReleases = data;
+      this.loading = false;
+    });
+
+    this.spotifyService.getTopPlaylists().subscribe(( data: any) => {
+      this.topPlaylists = data.playlists.items;
+    }, error => {
+      console.error('Error fetching top playlists:', error);
+    });
+
+    this.spotifyService.getArtistas('pop').subscribe(data => {
+      this.topArtists = data;
+    }, error => {
+      console.error('Error fetching random artists:', error);
+    });
   }
 }
