@@ -7,7 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <form  #signUpForm="ngForm">
+  <img src="./icon/bisonMusic_icon.JPG">
+
+  <ion-button (click)="login()" >Log in with Spotify</ion-button>
+  <!--<form  #signUpForm="ngForm">
     <ion-list>
       <ion-item>
         <ion-input label="Name" name="name" placeholder="Enter name" type="text" [(ngModel)]="addUser.name" required="true" mode="md" fill="outline"></ion-input>
@@ -26,6 +29,7 @@
       </ion-item>
     </ion-list>
     <ion-button expand="block" color="primary" [disabled]="signUpForm.invalid" routerLink="/tabs" (click)="addDocument()">Sign Up</ion-button>
-  </form>
+
+  </form>-->
 </ion-content>
 

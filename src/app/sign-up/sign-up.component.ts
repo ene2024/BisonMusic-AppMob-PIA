@@ -3,6 +3,8 @@ import { addDoc, collection } from "firebase/firestore";
 import { getFirestore, doc } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
+import { GlobalService } from '../global.service';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SignUpComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private _globalService: GlobalService, private spotifyService: SpotifyService) { }
 
   ngOnInit() {}
 
@@ -37,6 +39,9 @@ export class SignUpComponent  implements OnInit {
       password: this.addUser.password,
     })
   };
-  
+
+  login() {
+    this._globalService.redirectToSpotifyAuthorize();
+  }  
 
 }
