@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalService } from '../global.service';
-import { map } from 'rxjs/operators';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,22 +24,6 @@ export class SpotifyService {
 
     return this.http.get(URL, HEADER);
   }
-/*
-  getRandomArtists() {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._globalService.accessToken}`
-    });
-
-    return this.http.get('https://api.spotify.com/v1/browse/categories/pop/playlists', { headers });
-  }
-
-  getRandomTracks() {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this._globalService.accessToken}`
-    });
-
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers });
-  }*/
 
   getTopPlaylists() {
     const headers = new HttpHeaders({
@@ -67,12 +51,24 @@ export class SpotifyService {
 
   }
 
-/*
-  getTopTracks() {
+  geUserPlaylists() {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this._globalService.accessToken}`
     });
 
-    return this.http.get('https://api.spotify.com/v1/me/top/tracks', { headers });
-  }*/
+    return this.http.get('https://api.spotify.com/v1/me/playlists', { headers });
+  }
+
+  search(term: string): Observable<any[]> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${this._globalService.accessToken}` });
+    const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(term)}&type=artist,track&limit=10`;
+
+    return this.http.get(searchUrl, { headers }).pipe(
+      map((response: any) => {
+        const artists = response.artists?.items.map((item: any) => ({ ...item, type: 'artist' })) || [];
+        const tracks = response.tracks?.items.map((item: any) => ({ ...item, type: 'track' })) || [];
+        return [...artists, ...tracks];
+      })
+    );
+  }
 }

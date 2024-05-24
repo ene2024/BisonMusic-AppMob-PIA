@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit{
 
-  constructor() {} 
+  userData: any;
+
+  constructor( private _authService: AuthService) {}
+  
+  ngOnInit() {
+    
+    this._authService.userData$.subscribe(data => {
+      this.userData = data;
+    });
+
+    this._authService.init();
+  }
 
 }

@@ -1,8 +1,13 @@
-<ion-menu contentId="main-content">
+<ion-menu contentId="main-content" *ngIf="userData">
   <ion-header>
     <ion-toolbar>
       <div>
-        <ion-button href="/login" fill="clear"><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-button>
+        <ion-button href="/login" fill="clear">
+          <ion-avatar>
+            <ion-icon *ngIf="!(userData.images && userData.images.length > 0)" name="person-circle-outline" size="large"></ion-icon>
+            <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
+          </ion-avatar>
+        </ion-button>
       </div>
     </ion-toolbar>
   </ion-header>
@@ -13,7 +18,7 @@
   </ion-content>
 </ion-menu>
 
-<ion-tabs>
+<ion-tabs *ngIf="userData">
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" href="/tabs/tab1" class="custom-button">
@@ -33,3 +38,7 @@
   </ion-tab-bar>
 
 </ion-tabs>
+
+<div *ngIf="!userData">
+  <app-sign-up></app-sign-up>
+</div>
