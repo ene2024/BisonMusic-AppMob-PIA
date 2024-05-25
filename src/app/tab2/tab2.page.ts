@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { FavoritesService } from '../services/favorites.service';
 
 @Component({
   selector: 'app-tab2',
@@ -14,7 +15,7 @@ export class Tab2Page implements OnInit {
   searchResults: any[] = [];
   private searchTerms = new Subject<string>();
 
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(private spotifyService: SpotifyService, private favoritesService: FavoritesService) {}
 
   ngOnInit() {
     this.searchTerms.pipe(
@@ -39,5 +40,9 @@ export class Tab2Page implements OnInit {
     } else {
       this.searchTerms.next(term);
     }
+  }
+
+  addToFavorites(song: any) {
+    this.favoritesService.addSong(song);
   }
 }

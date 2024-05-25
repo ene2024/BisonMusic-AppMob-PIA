@@ -2,49 +2,27 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button routerLink="/tabs" fill="clear">
+        <ion-button routerLink="/tabs/tab3" fill="clear">
           <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>Profile</ion-title>
+      <ion-title>Liked Songs</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    
-    <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
-    <h6>Followers: {{ userData.followers.total}}</h6>
+    <h1>add Songs</h1>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let item of likedSongs">
+        <ion-thumbnail slot="start">
+          <img [src]="item.album.images[0].url" [alt]="item.name" />
+        </ion-thumbnail>
         <ion-label>
-          Username: 
-          <h1> {{ userData.display_name }}</h1>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Email: 
-          <h1> {{ userData.email }} </h1>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Country: 
-          <h1> {{ userData.country }} </h1>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Type: 
-          <h1> {{ userData.product }} </h1>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          Link Spotify
-          <a [href]="userData.external_urls.spotify">{{ userData.external_urls.spotify }}</a>
+          <h1>Artistas: 
+            <span *ngFor="let artist of item.artists; let isLast = last">{{ artist.name }}<span *ngIf="!isLast">, </span></span>
+          </h1>
+          <h2>{{ item.name }}</h2>
         </ion-label>
       </ion-item>
     </ion-list>
-    <ion-button (click)="logout()">Log out</ion-button>
   </ion-content>
 

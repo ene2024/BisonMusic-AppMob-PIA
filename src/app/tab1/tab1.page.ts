@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { GlobalService } from '../global.service';
 import { map } from 'rxjs';
+import { FavoritesService } from '../services/favorites.service';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +17,7 @@ export class Tab1Page implements OnInit {
   newReleases: any[] = [];
   loading: boolean = false;
 
-  constructor(private _globalService: GlobalService, private spotifyService: SpotifyService) { }
+  constructor(private _globalService: GlobalService, private spotifyService: SpotifyService, private favoritesService: FavoritesService) { }
 
   async ngOnInit() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -76,5 +77,9 @@ export class Tab1Page implements OnInit {
     }, error => {
       console.error('Error fetching random artists:', error);
     });
+  }
+
+  addToFavorites(song: any) {
+    this.favoritesService.addSong(song);
   }
 }

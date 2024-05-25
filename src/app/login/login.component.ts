@@ -5,7 +5,7 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { docData, getDoc, setDoc } from '@angular/fire/firestore';
 import { user } from '@angular/fire/auth';
-import { SpotifyService } from '../services/spotify.service';
+import { FavoritesService } from '../services/favorites.service';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +14,16 @@ import { SpotifyService } from '../services/spotify.service';
 })
 export class LoginComponent  implements OnInit {
 
-
-  userData: any;
-  constructor( private spotifyService: SpotifyService) { }
+  likedSongs: any[] = [];
+  constructor( private favoritesService: FavoritesService) { }
 
   ngOnInit() {
-    this.spotifyService.getUserData().subscribe(data => {
-      this.userData = data;
-      console.log('User Data:', this.userData);
+    this.favoritesService.likedSongs$.subscribe(songs => {
+      this.likedSongs = songs;
+      console.log('Liked Songs:', this.likedSongs);
     });
   }
-
+/*
   addUser={
     name:  "",
     lastName: "",
@@ -51,5 +50,5 @@ export class LoginComponent  implements OnInit {
     localStorage.clear();
     this.userData = null;
     window.location.href = '/';
-  }
+  }*/
 }

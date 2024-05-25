@@ -1,39 +1,6 @@
-<!--<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>-->
-<!--ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <div>
-        <ion-button routerLink="/login" fill="clear"><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-button>
-      </div>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <h6>What's new</h6>
-    <h6>History</h6>
-    <h6>Settings and Privacity</h6>
-  </ion-content>
-</ion-menu>-->
-
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
-
       <ion-buttons slot="start">
         <ion-menu-button>
           <ion-icon name="menu-outline"></ion-icon>
@@ -41,64 +8,14 @@
       </ion-buttons>
       <ion-title>Hi, Welcome Back </ion-title>
       <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon name="notifications"></ion-icon>
-        </ion-button>
         <ion-button routerLink="/tabs/tab2">
           <ion-icon name="search"></ion-icon>
         </ion-button>
       </ion-buttons>
-
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
 
-    <div *ngIf="!userData">
-      <h1>Welcome to the OAuth2 PKCE Example</h1>
-      <ion-button (click)="login()">Log in with Spotify</ion-button>
-    </div>
-  
-    <div *ngIf="userData">
-    <h1>Logged in as {{ userData.display_name }}</h1>
-    <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
-    <table>
-      <tr>
-        <td>Display name</td>
-        <td>{{ userData.display_name }}</td>
-      </tr>
-      <tr>
-        <td>Id</td>
-        <td>{{ userData.id }}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{{ userData.email }}</td>
-      </tr>
-      <tr>
-        <td>Spotify URI</td>
-        <td><a [href]="userData.external_urls.spotify">{{ userData.external_urls.spotify }}</a></td>
-      </tr>
-      <tr>
-        <td>Link</td>
-        <td><a [href]="userData.href">{{ userData.href }}</a></td>
-      </tr>
-      <tr>
-        <td>Profile Image</td>
-        <td><a *ngIf="userData.images && userData.images.length > 0" [href]="userData.images[0].url">{{ userData.images[0].url }}</a></td>
-      </tr>
-      <tr>
-        <td>Country</td>
-        <td>{{ userData.country }}</td>
-      </tr>
-    </table>
-
-    <ion-button (click)="refreshToken()">Refresh Token</ion-button>
-    <ion-button (click)="logout()">Log out</ion-button>
-    </div>
-    <div *ngIf="loading">
-      <ion-spinner></ion-spinner>
-    </div>
-  
+  <ion-content class="ion-padding0">
     <ion-item-group *ngIf="topArtists.length > 0">
 
       <ion-item-divider>
@@ -110,12 +27,16 @@
         </ion-buttons>
       </ion-item-divider>
 
-      <ion-item *ngFor="let artist of topArtists">
-        <ion-avatar slot="start">
-          <img *ngIf="artist.images && artist.images.length > 0" [src]="artist.images[0].url" [alt]="artist.name" />
-        </ion-avatar>
-        <ion-label>{{ artist.name }}</ion-label>
-      </ion-item>
+      <div class="scroll-container">
+        <ion-item *ngFor="let artist of topArtists" class="scroll-x">
+          <div class="x-container">
+            <ion-avatar>
+              <img *ngIf="artist.images && artist.images.length > 0" [src]="artist.images[0].url" [alt]="artist.name" />
+            </ion-avatar>
+            <ion-label class="label-center">{{ artist.name }}</ion-label>
+          </div>
+        </ion-item>
+      </div>
 
     </ion-item-group>
 
@@ -130,12 +51,16 @@
         </ion-buttons>
       </ion-item-divider>
       
-      <ion-item *ngFor="let playlist of topPlaylists">
-        <ion-avatar slot="start">
-          <img *ngIf="playlist.images && playlist.images.length > 0" [src]="playlist.images[0].url" [alt]="playlist.name" />
-        </ion-avatar>
-        <ion-label>{{ playlist.name }}</ion-label>
-      </ion-item>
+      <div class="scroll-container">
+        <ion-item *ngFor="let playlist of topPlaylists"  class="scroll-x">
+          <div class="x-container">
+            <ion-avatar class="img-playlist">
+              <img *ngIf="playlist.images && playlist.images.length > 0" [src]="playlist.images[0].url" [alt]="playlist.name" />
+            </ion-avatar>
+            <ion-label class="label-center">{{ playlist.name }}</ion-label>
+          </div>
+        </ion-item>
+      </div>
 
     </ion-item-group>
 
@@ -156,27 +81,17 @@
           </ion-thumbnail>
           <ion-label>
             <h1>Artistas: 
-              <span *ngFor="let artist of item.artists">{{ artist.name }}</span>
+              <span *ngFor="let artist of item.artists; let isLast = last">{{ artist.name }}<span *ngIf="!isLast">, </span></span>
             </h1>
             <h2>{{ item.name }}</h2>
           </ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="addToFavorites(item)">
+              <ion-icon name="heart-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-item>
       </ion-list>
-
-      <!--ion-card>
-        <img width="90px" height="60px" src="https://www.record.com.mx/sites/default/files/styles/v2-crop768x433/public/articulos/2024/05/13/mencho_muerte_1.jpg?itok=eHl0KsM9" alt="mencho">
-        <ion-card-header>
-          <ion-card-title>Joji</ion-card-title>
-          <ion-fab horizontal="end" slot="fixed">
-            <ion-fab-button>
-              <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
-        </ion-card-header>
-        <ion-card-content>
-          Die For Mencho
-        </ion-card-content>
-      </ion-card-->
     </ion-item-group>
   </ion-content>
 </div>
