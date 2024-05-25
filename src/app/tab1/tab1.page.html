@@ -80,7 +80,7 @@
             <img [src]="item.images[0].url" [alt]="item.name" />
           </ion-thumbnail>
           <ion-label>
-            <h1>Artistas: 
+            <h1>Artists: 
               <span *ngFor="let artist of item.artists; let isLast = last">{{ artist.name }}<span *ngIf="!isLast">, </span></span>
             </h1>
             <h2>{{ item.name }}</h2>

@@ -1,3 +1,93 @@
-/*ion-content, ion-toolbar {
-    --background: #0F0818 !important;
-}*/
+
+ion-searchbar {
+    --background: var(--ion-button-hover-color);
+    --color: var(--ion-text-color);
+    --placeholder-color: var(--ion-text-color);
+    --icon-color: var(--ion-text-color);
+    border-radius: 10px;
+    padding: 3px;
+
+    input {
+        font-family: 'Baloo Bhai 2', cursive;
+        color: var(--ion-text-color);
+    }
+}
+
+ion-avatar {
+    border: 2px solid var(--ion-primary-color);
+    border-radius: 50%;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+
+    img {
+        border-radius: 50%;
+    }
+}
+
+ion-list {
+    margin: 0;
+    padding: 0;
+}
+
+ion-item {
+    margin: 5px 0;
+    padding: 10px;
+    --background: var(--ion-accent-color);
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background-color: var(--ion-background-color);
+        transform: scale(1.02);
+    }
+
+    ion-label {
+        font-size: 1em;
+
+        h1, h2 {
+            font-family: 'Baloo Bhai 2', cursive;
+            color: var(--ion-text-color);
+        }
+        
+        h1 {
+            font-size: 1.2em;
+            margin: 5px 0;
+            font-weight: bold;
+    
+            span {
+                color: var(--ion-text-color);
+            }
+        }
+
+            
+        h2 {
+            font-size: 1em;
+            color: var(--ion-text-color);
+        }
+    }
+
+    ion-thumbnail {
+        --border-radius: 10px;
+        overflow: hidden;
+        
+        img {
+            border-radius: 10px;
+        }
+    }
+    
+
+    ion-buttons {
+        ion-button {
+            --color: var(--ion-text-color);
+            --background-hover: var(--ion-secondary-color);
+            padding: 5px 10px;
+            font-size: 0.9em;
+            font-family: 'Baloo Bhai 2', cursive;
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+}

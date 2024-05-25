@@ -12,13 +12,16 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
-      <!-- Artistas -->
       <ng-container *ngFor="let item of searchResults">
+        <!-- Artistas -->
         <ion-item *ngIf="item.type === 'artist'">
           <ion-avatar slot="start">
             <img *ngIf="item.images && item.images.length > 0" [src]="item.images[0].url" [alt]="item.name" />
           </ion-avatar>
-          <ion-label>{{ item.name }}</ion-label>
+          <ion-label>
+            <h1>{{ item.name }}</h1>
+            <h4>Artist</h4>
+          </ion-label>
         </ion-item>
 
         <!-- Canciones -->

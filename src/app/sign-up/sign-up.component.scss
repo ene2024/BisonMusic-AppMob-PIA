@@ -1,0 +1,32 @@
+ion-card {
+    background: var(--ion-background-color);
+    color: var(--ion-text-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px var(--ion-button-shadow-color);
+    padding: 16px;
+}
+
+ion-input {
+    --background: var(--ion-accent-color);
+    --placeholder-color: var(--ion-text-color);
+    --color: var(--ion-text-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+
+ion-button {
+    --background: var(--ion-primary-color);
+    --color: var(--ion-text-color);
+    --box-shadow: 0 4px 8px var(--ion-button-shadow-color);
+    transition: background-color 0.3s ease;
+}
+
+ion-button:hover {
+    background-color: var(--ion-button-hover-color);
+}
+
+.suggestion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

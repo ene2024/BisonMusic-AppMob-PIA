@@ -1,0 +1,105 @@
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background: linear-gradient(135deg, #1E222D 0%, #2C303B 100%);
+    color: #fff;
+}
+  
+.login-initial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background: linear-gradient(135deg, #1E222D 0%, #2C303B 100%);
+    color: #fff;
+} 
+
+.login-initial .title {
+    font-size: 3em;
+    font-family: 'Pacifico', cursive;
+    color: #6A0DAD; 
+    text-shadow: 2px 2px #2C303B;
+    margin-bottom: 10px;
+    animation: bounce 1.5s infinite;
+}
+  
+
+.login-initial .subtitle {
+    font-size: 2em;
+    font-family: 'Indie Flower', cursive;
+    color: #fff;
+    text-shadow: 1px 1px #6A0DAD;
+    margin-bottom: 10px;
+    animation: fadeIn 2s ease-in-out;
+}
+  
+.login-initial h5 {
+    font-size: 1.2em;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #C060FF;
+    text-shadow: 1px 1px #1E222D;
+    margin-bottom: 20px;
+    animation: slideIn 1s ease-out;
+}
+  
+.login-initial .login-button {
+    --background: #6A0DAD; 
+    --background-hover: #5A0B8A;
+    --border-radius: 50px;
+    font-size: 1.5em;
+    font-family: 'Baloo Bhai 2', cursive;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+  
+.login-initial .login-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+  
+.login-initial .icono-bisonMusic {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+  
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+}
+  
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+  
+@keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+}
+  
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Indie+Flower&family=Pacifico&display=swap');
+  
