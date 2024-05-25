@@ -8,12 +8,22 @@ import { Router } from '@angular/router';
 export class GlobalService {
 
   private clientId = 'a0728abd90734b07be8c274d022862a0';
-  private redirectUrl = 'http://localhost:8100/tabs/tab1';
+  private redirectUrl: string = '';
   private authorizationEndpoint = "https://accounts.spotify.com/authorize";
   private tokenEndpoint = "https://accounts.spotify.com/api/token";
   private scope = 'user-read-private user-read-email';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { 
+    this.redirectUrl = this.getRedirectUrl();
+  }
+
+  private getRedirectUrl(): string {
+    if(window.location.hostname === 'localhost') {
+      return 'http://localhost:8100/tabs/tab1';
+    } else {
+      return 'myapp://callback';
+    }
+  }
 
   private saveToken(response: any) {
     const { access_token, refresh_token, expires_in } = response;

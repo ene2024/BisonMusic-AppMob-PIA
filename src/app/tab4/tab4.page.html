@@ -13,7 +13,7 @@
 
     <ion-button (click)="addPhotoProfile()">
       <ion-icon name="camera-outline"></ion-icon>
-      <ion-label>Share you photos :D</ion-label>
+      <ion-label>Share your photos :D</ion-label>
     </ion-button>
     <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
     <h6>Followers: {{ userData.followers.total}}</h6>

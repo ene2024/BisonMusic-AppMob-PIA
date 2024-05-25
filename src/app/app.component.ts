@@ -21,8 +21,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+    const code = this.getAuthorizationCodeFromURL();
 
     if (code) {
       await this._globalService.getToken(code);
@@ -45,6 +44,12 @@ export class AppComponent implements OnInit {
     } else {
       this.isLoading = false;
     }
+  }
+
+  private getAuthorizationCodeFromURL(): string | null {
+    const url = window.location.href;
+    const codeMatch = url.match(/code=([^&]*)/);
+    return codeMatch ? codeMatch[1] : null;
   }
 
   login() {
