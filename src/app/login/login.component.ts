@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Route } from '@angular/router';
-import { TabsPage } from '../tabs/tabs.page';
 import { addDoc, collection } from "firebase/firestore";
 import { getFirestore, doc } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { docData, getDoc, setDoc } from '@angular/fire/firestore';
 import { user } from '@angular/fire/auth';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-login',
@@ -15,20 +14,16 @@ import { user } from '@angular/fire/auth';
 })
 export class LoginComponent  implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
+  userData: any;
+  constructor( private spotifyService: SpotifyService) { }
 
-  isModalOpen = false;
-  isSignUpOpen = false;
-
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+  ngOnInit() {
+    this.spotifyService.getUserData().subscribe(data => {
+      this.userData = data;
+      console.log('User Data:', this.userData);
+    });
   }
-
-  Open(isOpen: boolean) {
-    this.isSignUpOpen = isOpen;
-  }    
 
   addUser={
     name:  "",
@@ -36,8 +31,7 @@ export class LoginComponent  implements OnInit {
     user:  "",
     email:  "",
     password:  "",
-  }/*
-
+  }
 
   firestore = getFirestore(initializeApp(environment.firebaseConfig));
 
@@ -51,7 +45,11 @@ export class LoginComponent  implements OnInit {
       email: this.addUser.email,
       password: this.addUser.password,
     })
-  };*/
+  };
   
-
+  logout() {
+    localStorage.clear();
+    this.userData = null;
+    window.location.href = '/';
+  }
 }

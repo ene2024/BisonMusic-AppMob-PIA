@@ -1,3 +1,14 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <div *ngIf="isLoading">
+    <h1>Loading...</h1>
+    <h1>Logged in as {{ userData.display_name }}</h1>
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="!isLoading && !userData">
+    <h1>Welcome to the OAuth2 PKCE Example</h1>
+    <ion-button (click)="login()">Log in with Spotify</ion-button>
+  </div>
+  <div *ngIf="!isLoading && userData">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
 </ion-app>

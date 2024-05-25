@@ -51,7 +51,7 @@ export class SpotifyService {
 
   }
 
-  geUserPlaylists() {
+  getUserPlaylists() {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this._globalService.accessToken}`
     });

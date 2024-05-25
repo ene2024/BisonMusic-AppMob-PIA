@@ -34,6 +34,14 @@ export class GlobalService {
     return localStorage.getItem('access_token') || null;
   }
 
+  isTokenValid(): boolean {
+    const expires = localStorage.getItem('expires');
+    if (expires) {
+      return new Date(expires) > new Date();
+    }
+    return false;
+  }
+
   async redirectToSpotifyAuthorize() {
     const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const randomValues = crypto.getRandomValues(new Uint8Array(64));
@@ -87,7 +95,6 @@ export class GlobalService {
 
     const response = await this.http.post(this.tokenEndpoint, body.toString(), { headers }).toPromise();
     this.saveToken(response);
-    
   }
 
   logAccessToken() {

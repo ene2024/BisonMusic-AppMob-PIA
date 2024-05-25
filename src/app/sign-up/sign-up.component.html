@@ -1,12 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Sign Up</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/tabs" fill="clear">
+        <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Support</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <img src="./icon/bisonMusic_icon.JPG">
 
-  <ion-button (click)="login()" >Log in with Spotify</ion-button>
+  <form #suggestionForm="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Suggestion" name="msg" placeholder="Enter Suggestion" type="text" [(ngModel)]="message" required="true" mode="md" fill="outline"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" color="primary" [disabled]="suggestionForm.invalid" (click)="addDocument()" routerLink="/tabs" >
+      Send Suggestion
+    </ion-button>
+  </form>
   <!--<form  #signUpForm="ngForm">
     <ion-list>
       <ion-item>

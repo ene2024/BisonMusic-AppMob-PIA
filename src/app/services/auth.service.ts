@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -18,24 +18,30 @@ export class AuthService {
   async init() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-
+    console.log('Initializing AuthService...');
+  
     if (code) {
+      console.log('Code found:', code);
       await this._globalService.getToken(code);
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-
-    if (this._globalService.accessToken) {
-      this._spotifyService.getUserData().subscribe(data => {
+  
+    this._spotifyService.getUserData().subscribe(data => {
+      console.log('User data:', data);
+      this.userDataSubject.next(data);
+      if (this._globalService.accessToken) {
+        console.log('Redirecting to /tabs/tab1...');
         this.router.navigate(['/tabs/tab1']);
-        this.userDataSubject.next(data);
-      }, error => {
-        console.error('Error fetching user data:', error);
-        if (error.status === 401) {
-          this.router.navigate(['/sign-up']);
-        }
-      });
-    }
+      }
+    }, error => {
+      console.error('Error fetching user data:', error);
+      if (error.status === 401) {
+        this._globalService.redirectToSpotifyAuthorize();
+      }
+    });
   }
+  
+  
 
   login() {
     this._globalService.redirectToSpotifyAuthorize();
@@ -46,4 +52,4 @@ export class AuthService {
     this.userDataSubject.next(null);
     this.router.navigate(['/']);
   }
-}
+}*/

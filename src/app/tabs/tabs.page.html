@@ -1,24 +1,17 @@
-<ion-menu contentId="main-content" *ngIf="userData">
+<ion-menu contentId="main-content" >
   <ion-header>
     <ion-toolbar>
-      <div>
-        <ion-button href="/login" fill="clear">
-          <ion-avatar>
-            <ion-icon *ngIf="!(userData.images && userData.images.length > 0)" name="person-circle-outline" size="large"></ion-icon>
-            <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
-          </ion-avatar>
-        </ion-button>
-      </div>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <h6>What's new</h6>
-    <h6>History</h6>
     <h6>Settings and Privacity</h6>
+    <h6 routerLink="/sign-up">Support</h6>
   </ion-content>
 </ion-menu>
 
-<ion-tabs *ngIf="userData">
+<ion-tabs >
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" href="/tabs/tab1" class="custom-button">
@@ -35,10 +28,11 @@
       <ion-icon aria-hidden="true" name="library" class="custom-icon"></ion-icon>
       <ion-label class="custom-label">Library</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="tab4" href="/tabs/tab4" class="custom-button">
+      <ion-icon aria-hidden="true" name="person-outline" class="custom-icon"></ion-icon>
+      <ion-label class="custom-label">Profile</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 
 </ion-tabs>
-
-<div *ngIf="!userData">
-  <app-sign-up></app-sign-up>
-</div>

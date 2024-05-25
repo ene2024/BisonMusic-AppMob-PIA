@@ -7,7 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { SignUpComponent } from '../sign-up/sign-up.component';
-//import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../login/login.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,8 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
   ],
   declarations: [
     TabsPage,
-    SignUpComponent
+    SignUpComponent,
+    LoginComponent
   ]
 })
 export class TabsPageModule {}

@@ -3,8 +3,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { getFirestore, doc } from "firebase/firestore";
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { GlobalService } from '../global.service';
-import { AuthService } from '../services/auth.service';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,35 +12,29 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignUpComponent  implements OnInit {
 
-  constructor( private _globalService: GlobalService, private _authService: AuthService ) { }
+  userData: any;
+  message = '';
 
-  ngOnInit() {}
+  constructor( private _spotifyService: SpotifyService) { }
 
-  addUser={
-    name:  "",
-    lastName: "",
-    user:  "",
-    email:  "",
-    password:  "",
+
+  ngOnInit() {
+    this._spotifyService.getUserData().subscribe(data => {
+      this.userData = data;
+      console.log('User Data:', this.userData);
+    });
   }
-
 
   firestore = getFirestore(initializeApp(environment.firebaseConfig));
 
-  musicApp = collection(this.firestore, 'users');
+  musicApp = collection(this.firestore, 'suggestions');
 
   addDocument(){    
     const newDoc = addDoc(this.musicApp, {
-      name: this.addUser.name,
-      lastName: this.addUser.lastName,
-      user: this.addUser.user,
-      email: this.addUser.email,
-      password: this.addUser.password,
+      user: this.userData.display_name,
+      email: this.userData.email,
+      messsage: this.message
     })
   };
-
-  login() {
-    this._authService.login();
-  }  
 
 }

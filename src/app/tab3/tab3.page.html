@@ -1,56 +1,26 @@
-<!--<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
-</ion-content>-->
-
-<!--ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <div>
-        <ion-icon name="person-circle-outline" size="large"></ion-icon>
-      </div>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <h6>What's new</h6>
-    <h6>History</h6>
-    <h6>Settings and Privacity</h6>
-  </ion-content>
-</ion-menu-->
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button><ion-icon name="person-circle-outline" id="account" size="large"></ion-icon></ion-menu-button>
+        <ion-menu-button>
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-menu-button>
       </ion-buttons>
       <ion-title>Your Library</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Opps! It seems you don't have an account yet</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Please log in to view your liked songs and create your own playlists
-      </ion-card-content>
-      <ion-button expand="block" fill="clear" shape="round" routerLink="/login">
-        Sign In
-      </ion-button>
-    </ion-card>
+    <ion-list>
+      <ion-item *ngFor="let item of userPlaylists">
+        <ion-thumbnail slot="start">
+          <img *ngIf="item.images && item.images.length > 0" [src]="item.images[0].url" [alt]="item.name" />
+          <ion-icon name="image-outline" *ngIf="!(item.images && item.images.length > 0)" font-size="60px"></ion-icon>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </div>
 

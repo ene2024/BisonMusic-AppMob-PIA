@@ -1,46 +1,41 @@
-<!--<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content>-->
-
-<!--ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <div>
-        <ion-icon name="person-circle-outline" size="large"></ion-icon>
-      </div>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <h6>What's new</h6>
-    <h6>History</h6>
-    <h6>Settings and Privacity</h6>
-  </ion-content>
-</ion-menu>-->
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button><ion-icon name="person-circle-outline" id="account" size="large"></ion-icon></ion-menu-button>
+        <ion-menu-button>
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-menu-button>
       </ion-buttons>
       <ion-title>Search</ion-title>
     </ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
   </ion-header>
   <ion-content class="ion-padding">
+    <ion-list>
+      <!-- Artistas -->
+      <ng-container *ngFor="let item of searchResults">
+        <ion-item *ngIf="item.type === 'artist'">
+          <ion-avatar slot="start">
+            <img *ngIf="item.images && item.images.length > 0" [src]="item.images[0].url" [alt]="item.name" />
+          </ion-avatar>
+          <ion-label>{{ item.name }}</ion-label>
+        </ion-item>
+
+        <!-- Canciones -->
+        <ion-item *ngIf="item.type === 'track'">
+          <ion-thumbnail slot="start">
+            <img [src]="item.album.images[0].url" [alt]="item.name" />
+          </ion-thumbnail>
+          <ion-label>
+            <h1>Artistas: 
+              <span *ngFor="let artist of item.artists; let isLast = last">{{ artist.name }}<span *ngIf="!isLast">, </span></span>
+            </h1>
+            <h2>{{ item.name }}</h2>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
   </ion-content>
 </div>
+
 

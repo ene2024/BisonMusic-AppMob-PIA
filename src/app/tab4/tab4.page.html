@@ -1,16 +1,20 @@
-
+<div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button routerLink="/tabs" fill="clear">
-          <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
-        </ion-button>
+        <ion-menu-button>
+          <ion-icon name="menu-outline"></ion-icon>
+        </ion-menu-button>
       </ion-buttons>
       <ion-title>Profile</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    
+
+    <ion-button (click)="addPhotoProfile()">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-label>Share you photos :D</ion-label>
+    </ion-button>
     <img *ngIf="userData.images && userData.images.length > 0" width="150" [src]="userData.images[0].url" [alt]="userData.display_name" />
     <h6>Followers: {{ userData.followers.total}}</h6>
     <ion-list>
@@ -45,6 +49,15 @@
         </ion-label>
       </ion-item>
     </ion-list>
+    <h1>Photos</h1>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" size-md="4" size-lg="3" *ngFor="let photo of photos; index as i">
+          <img [src]="photo.webViewPath" alt="">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-button (click)="logout()">Log out</ion-button>
   </ion-content>
+</div>
 
